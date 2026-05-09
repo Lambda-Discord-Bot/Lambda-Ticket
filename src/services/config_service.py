@@ -1,6 +1,6 @@
 ﻿from __future__ import annotations
 
-import hikari
+import discord
 
 from src.database.repositories.guild_settings_repository import GuildSettingsRepository
 from src.models.ticket import GuildSettings
@@ -44,27 +44,25 @@ class ConfigService:
         await self.repository.get_settings(guild_id)
         await self.repository.reset_settings(guild_id)
 
-    async def validate_panel_prerequisites(
-        self,
-        rest: hikari.api.RESTClient,
-        guild_id: int,
-    ) -> tuple[bool, str]:
-        settings = await self.get_settings(guild_id)
+    async def validate_panel_prerequisites(self, guild: discord.Guild) -> tuple[bool, str]:
+        settings = await self.get_settings(guild.id)
 
         if settings.log_channel_id is None:
             return False, "로그 채널이 설정되지 않았습니다. `/람다티켓로그`를 먼저 사용해 주세요."
         if settings.ticket_category_id is None:
             return False, "티켓 카테고리가 설정되지 않았습니다. `/람다티켓카테고리`를 먼저 사용해 주세요."
 
-        try:
-            log_channel = await rest.fetch_channel(settings.log_channel_id)
-            category = await rest.fetch_channel(settings.ticket_category_id)
-        except hikari.NotFoundError:
-            return False, "저장된 채널 정보를 찾을 수 없습니다. 로그/카테고리를 다시 설정해 주세요."
+        log_channel = guild.get_channel(settings.log_channel_id)
+        category = guild.get_channel(settings.ticket_category_id)
 
-        if not isinstance(log_channel, hikari.GuildTextChannel):
+        if log_channel is None:
+            return False, "저장된 로그 채널을 찾을 수 없습니다. `/람다티켓로그`를 다시 설정해 주세요."
+        if not isinstance(log_channel, discord.TextChannel):
             return False, "로그 채널은 텍스트 채널이어야 합니다."
-        if not isinstance(category, hikari.GuildCategory):
+
+        if category is None:
+            return False, "저장된 티켓 카테고리를 찾을 수 없습니다. `/람다티켓카테고리`를 다시 설정해 주세요."
+        if not isinstance(category, discord.CategoryChannel):
             return False, "티켓 카테고리는 카테고리 채널이어야 합니다."
 
         return True, ""

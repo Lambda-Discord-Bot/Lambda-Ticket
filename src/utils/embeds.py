@@ -1,12 +1,12 @@
 ﻿from __future__ import annotations
 
-import hikari
+import discord
 
 
 
-def base_embed(title: str, description: str, *, color: int | None = None) -> hikari.Embed:
-    return hikari.Embed(
+def base_embed(title: str, description: str, *, color: discord.Color | None = None) -> discord.Embed:
+    return discord.Embed(
         title=title,
         description=description,
-        color=color if color is not None else 0x5865F2,
+        color=color or discord.Color.blurple(),
     )

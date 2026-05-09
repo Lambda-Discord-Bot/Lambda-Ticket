@@ -1,20 +1,22 @@
 ﻿from __future__ import annotations
 
-import hikari
+import discord
 
 
 
-def is_guild_admin(interaction: hikari.CommandInteraction) -> bool:
-    if interaction.guild_id is None or interaction.member is None:
+def is_guild_admin(interaction: discord.Interaction) -> bool:
+    if interaction.guild is None or interaction.user is None:
         return False
-    return bool(interaction.member.permissions & hikari.Permissions.ADMINISTRATOR)
-
-
-
-def can_manage_ticket_component(interaction: hikari.ComponentInteraction, ticket_owner_id: int) -> bool:
-    if interaction.member is None:
+    if not isinstance(interaction.user, discord.Member):
         return False
-    if int(interaction.user.id) == int(ticket_owner_id):
+    return interaction.user.guild_permissions.administrator
+
+
+
+def can_manage_ticket(interaction: discord.Interaction, ticket_owner_id: int) -> bool:
+    if not isinstance(interaction.user, discord.Member):
+        return False
+    if interaction.user.id == ticket_owner_id:
         return True
-    perms = interaction.member.permissions
-    return bool(perms & hikari.Permissions.ADMINISTRATOR or perms & hikari.Permissions.MANAGE_CHANNELS)
+    perms = interaction.user.guild_permissions
+    return perms.manage_channels or perms.administrator
