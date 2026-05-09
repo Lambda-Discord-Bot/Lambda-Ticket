@@ -2,7 +2,16 @@
 
 `discord.py` 기반의 음악 봇입니다.
 ## 패널 미리보기
-<img src="assets/ticket_log_embed.png" alt="Lambda Music Panel" width="30%" /><img src="assets/ticket_open_embed.png" alt="Lambda Music Panel" width="30%" /><img src="assets/ticket_panel_embed.png" alt="Lambda Music Panel" width="30%" />
+<table>
+<tr>
+<td><img src="assets/ticket_log_embed.png" width="100%"></td>
+<td>
+<img src="assets/ticket_open_embed.png" width="100%">
+<br><br>
+<img src="assets/ticket_panel_embed.png" width="100%">
+</td>
+</tr>
+</table>
 
 ## 실행 방법
 ```bash
