@@ -4,11 +4,11 @@
 ## 패널 미리보기
 <table>
 <tr>
-<td><img src="assets/ticket_log_embed.png" width="100%"></td>
+<td><img src="assets/ticket_log_embed.png" width="50%"></td>
 <td>
-<img src="assets/ticket_open_embed.png" width="100%">
+<img src="assets/ticket_open_embed.png" width="50%">
 <br><br>
-<img src="assets/ticket_panel_embed.png" width="100%">
+<img src="assets/ticket_panel_embed.png" width="50%">
 </td>
 </tr>
 </table>
