@@ -2,7 +2,7 @@
 
 import hikari
 
-from bot.core.constants import (
+from src.core.constants import (
     PANEL_CREATE_BUTTON_ID,
     PANEL_BUTTON_LABEL_INPUT_ID,
     PANEL_DESCRIPTION_INPUT_ID,

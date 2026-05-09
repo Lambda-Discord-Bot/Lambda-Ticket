@@ -5,12 +5,12 @@ from pathlib import Path
 
 import hikari
 
-from bot.database.repositories.guild_settings_repository import GuildSettingsRepository
-from bot.models.ticket import TicketRecord
-from bot.ui.components import build_close_button_row
-from bot.utils.embeds import base_embed
-from bot.utils.permissions import can_manage_ticket_component
-from bot.utils.time import format_kst_time
+from src.database.repositories.guild_settings_repository import GuildSettingsRepository
+from src.models.ticket import TicketRecord
+from src.ui.components import build_close_button_row
+from src.utils.embeds import base_embed
+from src.utils.permissions import can_manage_ticket_component
+from src.utils.time import format_kst_time
 
 
 class TicketService:

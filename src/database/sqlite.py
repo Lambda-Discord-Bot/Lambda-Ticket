@@ -4,7 +4,7 @@ from typing import Any, Iterable, Optional
 
 import aiosqlite
 
-from bot.database.base import BaseDatabase
+from src.database.base import BaseDatabase
 
 
 class SQLiteDatabase(BaseDatabase):

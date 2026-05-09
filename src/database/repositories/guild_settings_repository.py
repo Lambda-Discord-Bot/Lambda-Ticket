@@ -3,8 +3,8 @@
 from datetime import datetime
 from typing import Optional
 
-from bot.database.base import BaseDatabase
-from bot.models.ticket import GuildSettings, TicketRecord
+from src.database.base import BaseDatabase
+from src.models.ticket import GuildSettings, TicketRecord
 
 
 class GuildSettingsRepository:

@@ -2,8 +2,8 @@
 
 import hikari
 
-from bot.database.repositories.guild_settings_repository import GuildSettingsRepository
-from bot.models.ticket import GuildSettings
+from src.database.repositories.guild_settings_repository import GuildSettingsRepository
+from src.models.ticket import GuildSettings
 
 
 class ConfigService:

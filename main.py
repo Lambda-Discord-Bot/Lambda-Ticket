@@ -1,4 +1,4 @@
-﻿from bot.core.client import run_bot
+﻿from src.core.client import run_bot
 
 
 if __name__ == "__main__":

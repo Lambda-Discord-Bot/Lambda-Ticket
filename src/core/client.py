@@ -4,13 +4,13 @@ import logging
 
 import hikari
 
-from bot.commands.ticket_admin import TicketAdminHandler
-from bot.config.settings import load_settings
-from bot.core.logging import setup_logging
-from bot.database.repositories.guild_settings_repository import GuildSettingsRepository
-from bot.database.sqlite import SQLiteDatabase
-from bot.services.config_service import ConfigService
-from bot.services.ticket_service import TicketService
+from src.commands.ticket_admin import TicketAdminHandler
+from src.config.settings import load_settings
+from src.core.logging import setup_logging
+from src.database.repositories.guild_settings_repository import GuildSettingsRepository
+from src.database.sqlite import SQLiteDatabase
+from src.services.config_service import ConfigService
+from src.services.ticket_service import TicketService
 
 logger = logging.getLogger(__name__)
 

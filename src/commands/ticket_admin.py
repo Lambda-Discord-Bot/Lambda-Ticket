@@ -6,7 +6,7 @@ from typing import Iterable
 
 import hikari
 
-from bot.core.constants import (
+from src.core.constants import (
     PANEL_BUTTON_LABEL_INPUT_ID,
     PANEL_CREATE_BUTTON_ID,
     PANEL_DESCRIPTION_INPUT_ID,
@@ -16,15 +16,15 @@ from bot.core.constants import (
     TICKET_CREATE_MODAL_ID,
     TICKET_REASON_INPUT_ID,
 )
-from bot.services.config_service import ConfigService
-from bot.services.ticket_service import TicketService
-from bot.ui.components import (
+from src.services.config_service import ConfigService
+from src.services.ticket_service import TicketService
+from src.ui.components import (
     build_panel_button_row,
     build_panel_settings_modal_rows,
     build_ticket_reason_modal_row,
 )
-from bot.utils.embeds import base_embed
-from bot.utils.permissions import is_guild_admin
+from src.utils.embeds import base_embed
+from src.utils.permissions import is_guild_admin
 
 logger = logging.getLogger(__name__)
 
