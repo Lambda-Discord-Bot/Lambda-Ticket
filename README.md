@@ -3,14 +3,19 @@
 `discord.py` 기반의 음악 봇입니다.
 ## 패널 미리보기
 <div align="center">
+<table>
+<tr>
+<td border="0" cellspacing="0" cellpadding="0">
+<img src="assets/ticket_log_embed.png" width="400">
+</td>
 
-<img src="assets/ticket_log_embed.png" width="50%">
-
-<div>
-  <img src="assets/ticket_open_embed.png" width="50%">
-  <img src="assets/ticket_panel_embed.png" width="50%">
-</div>
-
+<td border="0" cellspacing="0" cellpadding="0">
+<img src="assets/ticket_open_embed.png" width="400">
+<br>
+<img src="assets/ticket_panel_embed.png" width="400">
+</td>
+</tr>
+</table>
 </div>
 
 ## 실행 방법
