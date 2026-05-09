@@ -2,16 +2,16 @@
 
 `discord.py` 기반의 음악 봇입니다.
 ## 패널 미리보기
-<table>
-<tr>
-<td><img src="assets/ticket_log_embed.png" width="50%"></td>
-<td>
-<img src="assets/ticket_open_embed.png" width="50%">
-<br><br>
-<img src="assets/ticket_panel_embed.png" width="50%">
-</td>
-</tr>
-</table>
+<div align="center">
+
+<img src="assets/ticket_log_embed.png" width="50%">
+
+<div>
+  <img src="assets/ticket_open_embed.png" width="50%">
+  <img src="assets/ticket_panel_embed.png" width="50%">
+</div>
+
+</div>
 
 ## 실행 방법
 ```bash
