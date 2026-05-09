@@ -1,0 +1,1 @@
+﻿"""Lambda Ticket Bot package."""
