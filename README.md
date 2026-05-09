@@ -8,7 +8,6 @@
 <td border="0" cellspacing="0" cellpadding="0">
 <img src="assets/ticket_log_embed.png" width="400">
 </td>
-
 <td border="0" cellspacing="0" cellpadding="0">
 <img src="assets/ticket_open_embed.png" width="400">
 <br>
