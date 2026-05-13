@@ -44,6 +44,26 @@ class ConfigService:
         await self.repository.get_settings(guild_id)
         await self.repository.reset_settings(guild_id)
 
+    async def add_admin_role(self, guild_id: int, role_id: int) -> None:
+        await self.repository.add_admin_role(guild_id, role_id)
+
+    async def remove_admin_role(self, guild_id: int, role_id: int) -> None:
+        await self.repository.remove_admin_role(guild_id, role_id)
+
+    async def list_admin_role_ids(self, guild_id: int) -> list[int]:
+        return await self.repository.list_admin_role_ids(guild_id)
+
+    async def is_ticket_admin(self, member: discord.Member) -> bool:
+        if member.guild_permissions.administrator:
+            return True
+
+        role_ids = await self.list_admin_role_ids(member.guild.id)
+        if not role_ids:
+            return False
+
+        member_role_ids = {role.id for role in member.roles}
+        return any(role_id in member_role_ids for role_id in role_ids)
+
     async def validate_panel_prerequisites(self, guild: discord.Guild) -> tuple[bool, str]:
         settings = await self.get_settings(guild.id)
 

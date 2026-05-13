@@ -33,4 +33,8 @@ class TicketControlView(discord.ui.View):
 
         await interaction.response.defer(ephemeral=True, thinking=True)
         success, message = await service.close_ticket(interaction, channel)
-        await interaction.followup.send(message, ephemeral=True)
+        try:
+            await interaction.edit_original_response(content=message)
+        except discord.NotFound:
+            # Original interaction response can be unavailable if Discord cleared it.
+            pass

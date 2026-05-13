@@ -44,6 +44,15 @@ class GuildSettingsRepository:
             )
             """
         )
+        await self.db.execute(
+            """
+            CREATE TABLE IF NOT EXISTS ticket_admin_roles (
+                guild_id INTEGER NOT NULL,
+                role_id INTEGER NOT NULL,
+                PRIMARY KEY (guild_id, role_id)
+            )
+            """
+        )
 
     async def get_settings(self, guild_id: int) -> GuildSettings:
         row = await self.db.fetchone(
@@ -137,6 +146,36 @@ class GuildSettingsRepository:
             (next_index, guild_id),
         )
         return next_index
+
+    async def add_admin_role(self, guild_id: int, role_id: int) -> None:
+        await self.db.execute(
+            """
+            INSERT OR IGNORE INTO ticket_admin_roles (guild_id, role_id)
+            VALUES (?, ?)
+            """,
+            (guild_id, role_id),
+        )
+
+    async def remove_admin_role(self, guild_id: int, role_id: int) -> None:
+        await self.db.execute(
+            """
+            DELETE FROM ticket_admin_roles
+            WHERE guild_id = ? AND role_id = ?
+            """,
+            (guild_id, role_id),
+        )
+
+    async def list_admin_role_ids(self, guild_id: int) -> list[int]:
+        rows = await self.db.fetchall(
+            """
+            SELECT role_id
+            FROM ticket_admin_roles
+            WHERE guild_id = ?
+            ORDER BY role_id ASC
+            """,
+            (guild_id,),
+        )
+        return [int(row["role_id"]) for row in rows]
 
     async def add_ticket(self, channel_id: int, guild_id: int, user_id: int, reason: str) -> None:
         await self.db.execute(

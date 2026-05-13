@@ -33,12 +33,20 @@ class TicketCreateModal(discord.ui.Modal, title="티켓 문의 작성"):
         success, message, ticket_channel = await service.create_ticket(interaction, str(self.reason))
 
         if not success or ticket_channel is None:
-            await interaction.followup.send(message, ephemeral=True)
+            await interaction.edit_original_response(content=message)
             return
+
+        config_service = getattr(interaction.client, "config_service", None)
+        role_ping_text = ""
+        if config_service is not None and interaction.guild is not None:
+            role_ids = await config_service.list_admin_role_ids(interaction.guild.id)
+            role_mentions = [f"<@&{role_id}>" for role_id in role_ids if interaction.guild.get_role(role_id) is not None]
+            if role_mentions:
+                role_ping_text = " " + " ".join(role_mentions)
 
         embed = base_embed(
             title="새 티켓이 생성되었습니다",
-            description="",
+            description="요청 내용을 확인한 뒤 답변해 드리겠습니다.",
             color=discord.Color.green(),
         )
         embed.add_field(name="요청자", value=interaction.user.mention, inline=True)
@@ -51,16 +59,18 @@ class TicketCreateModal(discord.ui.Modal, title="티켓 문의 작성"):
             image_file = discord.File(PANEL_IMAGE_PATH, filename="ticket_panel_image.png")
             embed.set_thumbnail(url="attachment://ticket_panel_image.png")
             await ticket_channel.send(
-                content=f"{interaction.user.mention} 스태프가 곧 확인할 예정입니다.",
+                content=f"{interaction.user.mention}{role_ping_text}",
                 embed=embed,
                 view=TicketControlView(),
                 file=image_file,
+                allowed_mentions=discord.AllowedMentions(users=True, roles=True),
             )
         else:
             await ticket_channel.send(
-                content=f"{interaction.user.mention} 스태프가 곧 확인할 예정입니다.",
+                content=f"{interaction.user.mention}{role_ping_text}",
                 embed=embed,
                 view=TicketControlView(),
+                allowed_mentions=discord.AllowedMentions(users=True, roles=True),
             )
 
-        await interaction.followup.send(f"티켓이 생성되었습니다: {ticket_channel.mention}", ephemeral=True)
+        await interaction.edit_original_response(content=f"티켓이 생성되었습니다: {ticket_channel.mention}")

@@ -64,6 +64,20 @@ class TicketService:
                 manage_messages=True,
             ),
         }
+        support_role_ids = await self.repository.list_admin_role_ids(interaction.guild.id)
+        for role_id in support_role_ids:
+            role = interaction.guild.get_role(role_id)
+            if role is None:
+                continue
+            overwrites[role] = discord.PermissionOverwrite(
+                view_channel=True,
+                send_messages=True,
+                read_message_history=True,
+                attach_files=True,
+                embed_links=True,
+                manage_channels=True,
+                manage_messages=True,
+            )
 
         ticket_channel = await interaction.guild.create_text_channel(
             name=channel_name,
